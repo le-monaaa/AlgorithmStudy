@@ -1,33 +1,38 @@
 import sys
-sys.setrecursionlimit(10 ** 6)
 input = sys.stdin.readline
 
-N, M, R = map(int, input().split()) # N: 정점수 M: 간선수 R: 시작 정점
-graph = [[] for _ in range(N + 1)]
-visited = [0] * (N+1)
+N, M, R = map(int, input().split()) # N: 정점, M: 간선, R: 시작 정점
+graph = [[] for _ in range(N+1)]
 
 cnt = 1
-def dfs(v, visited):
+visited = [0] * (N+1)
+
+# 깊이 우선 탐색 - 재귀 x 스택 사용
+def dfs(start):
     global cnt
 
-    visited[v] = cnt
+    stack = [start]
 
-    for i in graph[v]:
-        if visited[i] == 0:
+    while stack:
+        v = stack.pop()
+
+        if visited[v] == 0:
+            visited[v] = cnt
             cnt += 1
-            dfs(i, visited)
+            for i in sorted(graph[v], reverse=True):
+                if visited[i] == 0:
+                    stack.append(i)
 
-for _ in range(M):
-    u, v = map(int, input().split()) # u: 정점 v: 정점. 가중치 1 양방향 간선
+
+for i in range(M):
+    u, v = map(int, input().split())
     graph[u].append(v)
     graph[v].append(u)
 
-for i in range(N+1):
+for i in range(N + 1):
     graph[i].sort()
 
-
-dfs(R, visited)
-
+dfs(R)
 
 for i in range(1, N+1):
     print(visited[i])
