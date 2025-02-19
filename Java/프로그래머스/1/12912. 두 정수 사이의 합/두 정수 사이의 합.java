@@ -1,17 +1,13 @@
 class Solution {
     public long solution(int a, int b) {
-        long answer = 0;
-        if (a==b) {
-            return a;
-        }
-        if (a > b) {
+        if(a > b) {
             int temp = a;
             a = b;
             b = temp;
         }
-        while(a <= b) {
-            answer += a;
-            a++;
+        long answer = 0;
+        for(int i = a; i <= b; i++) {
+            answer+=i;
         }
         return answer;
     }
