@@ -1,11 +1,21 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 class Solution {
     public int[] solution(int[] arr, int divisor) {
-        int[] answer = Arrays.stream(arr)
-                .filter(num -> num % divisor == 0)
-                .sorted()
-                .toArray();
+        ArrayList<Integer> answer = new ArrayList<>();
+        Integer[] intArr = Arrays.stream(arr)
+            .boxed()
+            .toArray(Integer[]::new);
+        Arrays.sort(intArr);
+        for(int num : intArr) {
+            if(num%divisor==0) {
+                answer.add(num);
+            }
+        }
+        if(answer.size() == 0) {
+            return new int[]{-1};
+        }
 
-        return answer.length == 0 ? new int[]{-1} : answer;
+        return answer.stream().mapToInt(Integer::intValue).toArray();
     }
 }
