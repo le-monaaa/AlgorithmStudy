@@ -1,21 +1,16 @@
 class Solution {
     public int solution(int[][] sizes) {
-        int size1 = 0;
-        int size2 = 0;
-        for(int[] card : sizes) {
-            if (card[1] > card[0]) {
-                int temp = card[0];
-                card[0] = card[1];
-                card[1] = temp;
+        int w = 0;
+        int h = 0;
+        for(int i = 0; i < sizes.length; i++) {
+            if(sizes[i][0] < sizes[i][1] ) {
+                int temp = sizes[i][1];
+                sizes[i][1] = sizes[i][0];
+                sizes[i][0] = temp;
             }
-            if (size1 < card[0]) {
-                size1 = card[0];
-            }
-            if (size2 < card[1]) {
-                size2 = card[1];
-            }
+            if(sizes[i][0] > w) w = sizes[i][0];
+            if(sizes[i][1] > h) h = sizes[i][1];
         }
-        int answer = size1 * size2;
-        return answer;
+        return w * h;
     }
 }
