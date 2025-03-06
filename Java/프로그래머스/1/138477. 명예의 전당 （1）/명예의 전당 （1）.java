@@ -1,16 +1,19 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
 
 class Solution {
     public int[] solution(int k, int[] score) {
-        ArrayList<Integer> answer = new ArrayList<>();
-        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        List<Integer> result = new ArrayList<>();
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+
         for(int s: score) {
-            pq.add(s);
-            if(pq.size() > k) {
-                pq.poll();
+            minHeap.add(s);
+            if(minHeap.size() > k) {
+                minHeap.poll();
             }
-            answer.add(pq.peek());
+            result.add(minHeap.peek());
         }
-        return answer.stream().mapToInt(Integer::intValue).toArray();
+        return result.stream().mapToInt(Integer::intValue).toArray();
     }
 }
