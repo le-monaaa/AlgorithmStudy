@@ -1,23 +1,22 @@
+import java.util.Arrays;
+
 class Solution {
     public int[] solution(String s) {
         int[] answer = new int[s.length()];
-
-        for(int i=0; i < s.length(); i++) {
-            boolean found = false;
-            int j = i -1;
+        for(int i = s.length()-1; i >= 0; i--){
+            char target = s.charAt(i);
+            int j = i-1;
             int cnt = 1;
-            while (j >= 0) {
-                if(s.charAt(i) == s.charAt(j)) {
+            while(j >=0) {
+                if(s.charAt(j) == target) {
                     answer[i] = cnt;
-                    found = true;
                     break;
+                } else {
+                    cnt++;
+                    j--;
                 }
-                cnt++;
-                j--;
             }
-            if (!found) {
-                answer[i] = -1;
-            }
+            if(answer[i] == 0) answer[i] = -1;
         }
         return answer;
     }
