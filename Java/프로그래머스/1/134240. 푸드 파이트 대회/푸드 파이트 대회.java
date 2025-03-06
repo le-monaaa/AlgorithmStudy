@@ -1,18 +1,12 @@
 class Solution {
     public String solution(int[] food) {
         StringBuilder answer = new StringBuilder();
-        StringBuilder reversedPart = new StringBuilder();
-        int kcal = 1;
-        for(int i=1; i<food.length; i++) {
-            String f = (("" + kcal).repeat(food[i]/2));
-            answer.append(f);
-            reversedPart.insert(0, f);
-            kcal++;
+        StringBuilder reversed = new StringBuilder();
+        for(int i = 1; i < food.length; i++) {
+            String foods = String.valueOf(i).repeat(food[i]/2);
+            answer.append(foods);
+            reversed.insert(0, foods);
         }
-        answer.append("0");
-        answer.append(reversedPart);
-
-
-        return answer.toString();
+        return answer + "0" + reversed;
     }
 }
