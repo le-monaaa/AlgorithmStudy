@@ -1,9 +1,9 @@
 class Solution {
-    public int solution(int a, int b, int n) { // a: 필요빈병 b:수령새병 n:가진 병 수
+    public int solution(int a, int b, int n) {
         int answer = 0;
-        while ( n >= a ) {
-            answer += (n/a)*b;
-            n = (n/a)*b + n%a;
+        while (n >=a) {
+            answer += n/a*b;
+            n = n/a*b + n%a;
         }
         return answer;
     }
