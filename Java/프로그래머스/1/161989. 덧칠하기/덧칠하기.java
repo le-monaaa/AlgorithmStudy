@@ -1,15 +1,13 @@
 class Solution {
-    public int solution(int n, int m, int[] section) { // n: 전체 길이, m: 롤러 길이
-        int endPoint = 0;
-        int cnt = 0;
-        
-        for(int sec: section) {
-            if(sec > endPoint) {
-                endPoint = sec + m - 1;
-                cnt++;
+    public int solution(int n, int m, int[] section) {
+        int answer = 0;
+        int lastPainted = 0;
+        for (int s: section) {
+            if ( s > lastPainted) {
+                answer++;
+                lastPainted = s + m - 1;
             }
         }
-
-        return cnt;
+        return answer;
     }
 }
