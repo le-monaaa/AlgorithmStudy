@@ -1,29 +1,26 @@
-import java.util.*;
-
+import java.util.Set;
+import java.util.HashSet;
 class Solution {
     public int solution(int n, int[] lost, int[] reserve) {
-        // 해시셋 변환
         Set<Integer> lostSet = new HashSet<>();
-        Set<Integer> reserveSet = new HashSet<>();
-        for(int num : lost) lostSet.add(num);
-        for(int num : reserve) {
-            if(lostSet.contains(num)) {
-                lostSet.remove(num);
+        Set<Integer> reverseSet = new HashSet<>();
+
+        for(int l : lost) lostSet.add(l);
+        for(int r: reserve) {
+            if(lostSet.contains(r)) {
+                lostSet.remove(r);
             } else {
-                reserveSet.add(num);
+                reverseSet.add(r);
             }
         }
 
-        for(int l: new HashSet<>(lostSet)) {
-            if(reserveSet.contains(l - 1)) {
-                reserveSet.remove(l - 1);
-                lostSet.remove(l);
-            } else if (reserveSet.contains(l + 1)) {
-                reserveSet.remove(l + 1);
-                lostSet.remove(l);
+        for(int r: reverseSet) {
+            if(lostSet.contains(r -1)) {
+                lostSet.remove(r-1);
+            } else if (lostSet.contains(r+1)) {
+                lostSet.remove(r+1);
             }
         }
-
-        return n - lostSet.size();
+        return n- lostSet.size();
     }
 }
