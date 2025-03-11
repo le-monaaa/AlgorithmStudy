@@ -1,20 +1,15 @@
-import java.util.Arrays;
-
 class Solution {
     public int solution(int number, int limit, int power) {
-        int[] cnt = new int[number+1];
-        for (int i = 1; i <= number; i++) {
-            for (int j = i; j <= number; j += i) {
-                cnt[j]++;
-            }
-        }
+        int answer = 0;
         for(int i = 1; i <= number; i++) {
-            if (cnt[i] > limit) {
-                cnt[i] = power;
+            int n = 0;
+            if (Math.sqrt(i) == Math.floor(Math.sqrt(i))) n++;
+            for(int j = 1; j < Math.sqrt(i); j++){
+                if (i % j == 0) n += 2;
             }
+            if(n > limit) n = power;
+            answer += n;
         }
-
-        return Arrays.stream(cnt).sum();
+        return answer;
     }
-
 }
