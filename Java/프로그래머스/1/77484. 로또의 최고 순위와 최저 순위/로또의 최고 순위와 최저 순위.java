@@ -1,38 +1,34 @@
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 class Solution {
     public int[] solution(int[] lottos, int[] win_nums) {
-        int undefined = 0;
-        int correct = 0;
-        
+        int zeroCnt = 0;
+        int matched = 0;
         Set<Integer> winSet = new HashSet<>();
-        for (int num : win_nums) {
+        for(int num : win_nums) {
             winSet.add(num);
         }
-        
-        for(int lotto: lottos) {
-            if (lotto == 0) {
-                undefined++;
-            } else if (winSet.contains(lotto)){
-                correct++;
+
+        for(int num : lottos) {
+            if (num == 0) {
+                zeroCnt++;
+            } else if (winSet.contains(num)) {
+                matched++;
             }
         }
-        
-        int minRank = getRank(correct);
-        int maxRank = getRank(undefined + correct);
-
+        int maxRank = getRank(zeroCnt + matched);
+        int minRank = getRank(matched);
         return new int[]{maxRank, minRank};
     }
-
     private int getRank(int cnt) {
-        switch (cnt) {
-            case 6: return 1;
-            case 5: return 2;
-            case 4: return 3;
-            case 3: return 4;
-            case 2: return 5;
-            default: return 6;
-        }
+        return switch (cnt) {
+            case 6 -> 1;
+            case 5 -> 2;
+            case 4 -> 3;
+            case 3 -> 4;
+            case 2 -> 5;
+            default -> 6;
+        };
+
     }
 }
