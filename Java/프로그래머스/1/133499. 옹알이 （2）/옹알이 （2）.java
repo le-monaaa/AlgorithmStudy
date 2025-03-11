@@ -1,23 +1,12 @@
 class Solution {
     public int solution(String[] babbling) {
-        int cnt = 0;
-        String[] validWords = {"aya", "ye", "woo", "ma"};
-
-        for (String talk : babbling) {
-            if (talk.matches("^(aya|ye|woo|ma)+$")) {
-                boolean isValid = true;
-                for (int i = 0; i < validWords.length; i++) {
-                    if (talk.contains(validWords[i] + validWords[i])) {
-                        isValid = false;
-                        break;
-                    }
-                }
-                if (isValid) {
-                    cnt++;
-                }
-            }
+        int answer = 0;
+        for(int i = 0; i < babbling.length; i++){
+            babbling[i] = babbling[i].replaceAll("ayaaya|yeye|woowoo|mama", "1");
+            babbling[i] = babbling[i].replaceAll("aya|ye|woo|ma", "");
+            babbling[i] = babbling[i].replaceAll(" ", "");
+            if(babbling[i].equals("")) answer++;
         }
-
-        return cnt;
+        return answer;
     }
 }
