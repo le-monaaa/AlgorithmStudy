@@ -1,37 +1,36 @@
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
-        int m = Integer.parseInt(br.readLine());
-        int[] a = new int[n];
+
+        int N = Integer.parseInt(br.readLine());
+        int M = Integer.parseInt(br.readLine());
+
+        int[] ingre = new int[N];
         StringTokenizer st = new StringTokenizer(br.readLine());
-        for(int i = 0; i < n; i++) {
-            a[i] = Integer.parseInt(st.nextToken());
+        for(int i = 0; i < N; i++){
+            ingre[i] = Integer.parseInt(st.nextToken());
         }
-        Arrays.sort(a);
+        Arrays.sort(ingre);
+
         int cnt = 0;
-        int i = 0;
-        int j = n-1;
-        
-        while(i < j) {
-            if(a[i] + a[j] < m) {
-                i++;
-            } else if (a[i] + a[j] > m) {
-                j--;
-            } else {
+        int start_idx = 0;
+        int end_idx = N-1;
+        while(start_idx < end_idx){
+            if(ingre[start_idx] + ingre[end_idx] == M) {
                 cnt++;
-                i++;
-                j--;
+                start_idx++;
+                end_idx--;
+            } else if (ingre[start_idx] + ingre[end_idx] > M) {
+                end_idx--;
+            } else {
+                start_idx++;
             }
         }
+
         System.out.println(cnt);
-
     }
-
 }
