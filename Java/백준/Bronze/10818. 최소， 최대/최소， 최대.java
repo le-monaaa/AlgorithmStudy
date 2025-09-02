@@ -12,8 +12,8 @@ public class Main{
         
         for(int i = 0; i < t-1; i++) {
             int num = Integer.parseInt(st.nextToken());
-            if(max < num) max = num;
-            if(min > num) min = num;
+            max = Math.max(max, num);
+            min = Math.min(min, num);
         }
         
         System.out.println(min + " " + max);
